@@ -1,0 +1,13 @@
+{% load i18n %}
+<form class="branch" method="post" action="{% url apps.sprouts.views.branch_create %}">{% csrf_token %}
+	{% if form.errors %}
+	<p class="error">{% trans 'There were errors in form' %}</p>
+	{% endif %}
+	<fieldset>
+        <legend>{% trans "Branch out" %}</legend>
+        <input type="hidden" name="source" id="id_source" value="{{ object.pk }}">
+        <input type="hidden" name="user" id="id_user" value="{{ request.user.pk }}">
+        <p>{{ branch_form.target }}
+        <button type="submit">{% trans "Branch out" %}</button></p>
+    </fieldset>
+</form>

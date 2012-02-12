@@ -1,0 +1,12 @@
+{% for leaf in object.leaf_set.select_related.all %}
+<div id="leaf_{{ leaf.id }}" class="leaves {{ leaf.content_type|lower }}">
+    {% if perms.sprout.can_change or leaf.user == user or leaf.sprout.user == user %}
+        <menu id="leaf_{{ leaf.id }}_commands" class="leaf widget commands">
+            <a class="handle button" title="{% trans "Move" %}">{% trans "Move" %}</a>
+            <a class="update button" href="{{ leaf.content_object.get_update_url }}" title="{% trans "Update" %}">{% trans "Update" %}</a>
+            <a class="delete button" href="{{ leaf.content_object.get_delete_url }}" title="{% trans "Delete" %}">{% trans "Delete" %}</a>
+        </menu>
+    {% endif %}    
+    {% include leaf.detail_template %}
+</div>
+{% endfor %}

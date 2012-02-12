@@ -1,0 +1,16 @@
+{% extends 'accounts/base_accounts.html' %}
+
+{% block title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+<form action="" method="post" class="form form-horizontal">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% trans "Sign Up" %}</legend>
+    {{ form|as_bootstrap }}
+  </fieldset>
+  <div class="form-actions">
+      <input type="submit" value="{% trans "Sign Up"%}" class="btn-primary" />
+  </div>
+</form>
+{% endblock %}

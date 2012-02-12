@@ -1,0 +1,22 @@
+{% load ifsetting_tag %}
+<ul class="account nav pull-right">
+{% if user.is_authenticated %}
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">{% if user.first_name %}{{ user.first_name|escape }}{% else %}{{ user.username }}{% endif %} <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+            <li><a href="{% url accounts_email_change %}">{% trans "Account" %}</a></li>
+            {% if user.is_staff %}<li><a href="/admin/">{% trans "Admin" %}</a></li>{% endif %}
+            <li class="divider"></li>
+            <li><a href="{% url accounts_signout %}">{% trans "Logout" %}</a></li>
+		</ul>
+	</li>
+{% else %}
+	<li>
+		<p class="navbar-text">
+			<a href="{% url accounts_signin %}">{% trans 'Log In' %}</a>
+            or
+			<a href="{% url accounts_signup %}">{% trans 'Sign Up' %}</a>
+		</p>
+	<li>
+{% endif %}
+</ul> 		    		

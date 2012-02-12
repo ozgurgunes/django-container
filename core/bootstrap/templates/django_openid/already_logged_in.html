@@ -1,0 +1,9 @@
+{% extends "theme_base.html" %}
+
+{% block title %}{% trans "Already logged in" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Already logged in" %}</h1>
+    {% url accounts_signout as url_accounts_signout %}
+    <p>{% blocktrans %}You are already logged into the site. To login with a different OpenID please <a href="/openid/logout/?next={{ url_accounts_signout }}">logout</a> first.{% endblocktrans %}
+{% endblock %}

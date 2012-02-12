@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+{% block title %}{% trans "Sprouts" %} - {{ block.super }}{% endblock title %}
+{% block breadcrumb %}{{ block.super }} &ndash; <a href="{% url sprout.views.sprout_list %}">{% trans "Sprouts" %}</a>{% endblock %}
+
+{% block content %}
+    <section id="headline" class="content">{% block headline %}{% endblock %}</section>
+    <section id="main" class="content" role="main">{% block main %}{% endblock %}</section>
+    <aside id="side" class="content" role="complementary" >
+        {% block aside %}
+        {% with request.user as user %}{% include "profiles/_profile_panel.html" %}{% endwith %}
+        {% endblock %}
+    </aside>
+{% endblock %}

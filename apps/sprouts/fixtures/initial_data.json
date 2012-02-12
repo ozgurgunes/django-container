@@ -1,0 +1,146 @@
+[
+{
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": 
+    {
+        "domain": "filizver.local", 
+        "name": "Filizver"
+    }
+}, 
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": 
+    {
+        "username": "filizver", 
+        "first_name": "Filizver", 
+        "last_name": "Admin", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2010-10-25 19:18:16", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "sha1$ea4cc$f139a9a719f11585509756fd6390ff9946326a19", 
+        "email": "filizver@filizver.local", 
+        "date_joined": "2010-10-25 19:16:28"
+    }
+}, 
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": 
+    {
+        "username": "ozgur", 
+        "first_name": "Ozgur", 
+        "last_name": "Gunes", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": false, 
+        "last_login": "2010-10-25 19:18:16", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "sha1$3b24b$2cb715eb354bd7b0950d604a6b1413c410ed3e1d", 
+        "email": "o.gunes@gmail.com",
+        "date_joined": "2010-10-25 19:16:28"
+    }
+}, 
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": 
+    {
+        "username": "nefila", 
+        "first_name": "Nefila", 
+        "last_name": "Clavipes", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2010-10-25 19:18:16", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "sha1$99886$988eebb5549ae24acf1e3c16d1529d9f841406a5", 
+        "email": "ogbulk@gmail.com",
+        "date_joined": "2010-10-25 19:16:28"
+    }
+}, 
+{
+    "pk": 1, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 1, 
+        "title": "Hello World", 
+        "slug": "hello-world",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 1, 
+        "title": "Merhaba Dünya", 
+        "slug": "merhaba-dunya",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 1, 
+        "title": "The quick brown fox jumps over the lazy dog", 
+        "slug": "the-quick-brown-fox-jumps-over-the-lazy-dog",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 1, 
+        "title": "Hızlı kahverengi tilki tembel köpeğin üzerinden atladı", 
+        "slug": "hizli-kahverengi-tilki-tembel-kopegin-uzerinden-atladi",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 2, 
+        "title": "Pijamalı hasta yağız şoföre çabucak güvendi", 
+        "slug": "pijamali-hasta-yagiz-sofore-cabucak-guvendi",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "sprouts.sprout", 
+    "fields": 
+    {
+        "user": 2, 
+        "title": "Lorem ipsum dolor sit amet", 
+        "slug": "lorem-ipsum-dolor-sit-amet",
+        "date_created": "2010-10-25 19:18:32",
+        "is_public": true,
+        "tags": ""
+    }
+}
+]

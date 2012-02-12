@@ -1,0 +1,67 @@
+[
+  {
+    "model": "atlas.spod",
+    "pk": 1,
+    "fields": {
+      "user":        1,
+      "title":         "Adile Sultan Kasrı",
+      "spotline":         "Hababam Sınıfı bu binada çekildi.",
+      "latitude":    41.442726,
+      "longitude":  13.886719,
+      "created": "2009-07-21 12:00:00",
+      "status": 2
+    }
+  },
+  {
+    "model": "atlas.spod",
+    "pk": 2,
+    "fields": {
+      "user":        1,
+      "title":         "Aya Stefanos Rus Abidesi’nin Yıkılışı",
+      "spotline":         "Bilinen ilk Tük filmi. Şimdinin Yeşilköy'ü.",
+      "latitude":       40.981324,
+      "longitude":    28.859711,
+      "created": "2009-07-21 12:00:00",
+      "status": 2
+    }
+  },
+  {
+    "model": "atlas.spod",
+    "pk": 3,
+    "fields": {
+      "user":        1,
+      "title":         "James Bond",
+      "spotline":         "kız kulesi'nde geçiodu bi kısmı. denise richards'lı olan filmden bahsediyorum. neydi la adı?",
+      "latitude":    41.166766,
+      "longitude":  28.9482889,
+      "created": "2009-07-21 12:00:00",
+      "status": 2
+    }
+  },
+  {
+    "model": "atlas.spod",
+    "pk": 4,
+    "fields": {
+      "user":        1,
+      "title":         "Eşkıya'nın Terası",
+      "spotline":         "Rumeli Han'da, şu an 'Peri Petie'ye ait olan teras.",
+      "latitude":    41.032104,
+      "longitude":  28.951378,
+      "created": "2009-07-21 12:00:00",
+      "status": 2
+    }
+  },
+  {
+    "model": "atlas.spod",
+    "pk": 5,
+    "fields": {
+      "user":        1,
+      "title":         "Gırgıriye, Şekerpare",
+      "spotline":         "Beylerbeyi'nde Lazın Köşkü denilen bir köşk. Tam neresi bilmiyorum. (Yaprak Dökümü de orda çekiliyomuş)",
+      "latitude":    41.04544,
+      "longitude":  29.020042,
+      "created": "2009-07-21 12:00:00",
+      "status": 2
+    }
+  }
+]

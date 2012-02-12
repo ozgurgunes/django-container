@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+  <script type="text/javascript" charset="utf-8">
+  //<![CDATA[
+    $(document).ready(function () {
+      var map;
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById('map'));
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(41.066766,28.9482889), 12);
+				map.enableScrollWheelZoom();
+
+        {% for spod in object_list %}
+
+        var marker_{{ spod.id }} = new GMarker(new GLatLng({{ spod.latitude }},{{ spod.longitude }}));
+        map.addOverlay(marker_{{ spod.id }});
+        GEvent.addListener(marker_{{ spod.id }}, 'click', function(){
+          GDownloadUrl('{{ spod.get_absolute_url }}', function(data, responseCode) {
+            if (responseCode == 200 && data.length >= 1) {
+              marker_{{ spod.id }}.openInfoWindow('<div style="width: 400px">'+data+'</div>');
+              //new_marker.openInfoWindow(data);
+            }
+            else {
+              alert(responseCode);
+            }
+          });
+        });
+        $('#spod_{{ spod.id }}').click(function () {
+          GEvent.trigger(marker_{{ spod.id }}, 'click');
+        })
+
+        {% endfor %}
+      }
+    })
+  //]]>
+  </script>
+{% endblock %}
+
+{% block content %}
+<div id="side">
+  <ul>
+    {% for spod in object_list %}
+      <li id="spod_{{ spod.id }}" class="spod-item">
+        <p><a href="{{ spod.get_absolute_url }}" onclick="return false;"><b>{{ spod.title }}</b></a><br />
+          {{ spod.spotline }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  <!--// Paginator -->
+      {% load pagination %}{% pagination %}
+</div>
+<div id="map" class="browse">
+
+</div>
+{% endblock %}

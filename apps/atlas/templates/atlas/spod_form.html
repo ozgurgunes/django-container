@@ -1,0 +1,8 @@
+{% block content %}
+<form id="spod_form" action="{% url spod_create %}" method="post" accept-charset="utf-8">
+  <dl>
+  {{ form.as_p }}
+  </dl>
+  <p><input type="button" value="Kaydet ve Kapat" onclick="saveData()" class="submit button" /></p>
+</form>
+{% endblock %}

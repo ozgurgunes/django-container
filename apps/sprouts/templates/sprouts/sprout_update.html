@@ -1,0 +1,17 @@
+{% extends "sprouts/base_sprouts.html" %}
+
+{% block content %}
+    <heading class="content">
+        <h2>{% trans 'Update sprout' %}: {{ object.id }}</h2>
+    </heading>
+
+    {% if updated %}
+    <p class="content notice dialogue">{% trans 'Sprout updated' %}</p>
+    {% endif %}
+
+    {% if form and not updated %}
+        {% url apps.sprouts.views.sprout_update object.id as action %}
+        {% include "sprouts/_sprout_form.html" %}
+    {% endif %}
+
+{% endblock %}

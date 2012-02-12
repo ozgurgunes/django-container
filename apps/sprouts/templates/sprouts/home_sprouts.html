@@ -1,0 +1,45 @@
+{% extends "sprouts/base_sprouts.html" %}
+{% load pagination_tags %}
+{% block title %}{% trans "Latest sprouts" %} - {{ block.super }}{% endblock title %}
+{% block breadcrumb %}{{ block.super }} &ndash; <a href="{% url sprout.views.sprout_list %}">{% trans "Latest sprouts" %}</a>{% endblock %}
+
+{% block headline %}
+    {% if form %}
+    <header class="headline">
+        <h1>{% trans "What is on your mind?" %}</h1>
+    </header>
+    <form class="headline" method="post" action="{% url apps.sprouts.views.sprout_create %}">{% csrf_token %}
+    	{% if form.errors %}
+    	<p class="error dialogue">{% trans 'There were errors in form' %}</p>
+    	{% endif %}
+    	<fieldset>
+            <legend>{% trans "Let it sprout" %}</legend>
+            <p>
+                {{ form.title }}{{ form.user }}{{ form.parent }}            
+        	    <input type="hidden" name="next" value="{{ next }}" />
+        	    <button type="submit">{% trans 'Sprout' %}</button>
+    	    </p>
+        </fieldset>
+    </form>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% autopaginate object_list 10 %}
+    <header class="main">
+        <h2>{% trans "Latest sprouts" %}</h2>
+    </header>
+    <section class="main">
+    {% for object in object_list %}
+        <article class="section row {% cycle odd,even %}">
+        {% include "sprouts/_sprout_list.html" %}
+        </article>
+    {% empty %}
+        <p class="section empty">{% trans "No sprout yet" %}</p>    
+    {% endfor %}
+    </section>
+    <footer class="main">
+    {% paginate %}
+    </footer>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "sprouts/base_sprouts.html" %}
+{% load tagging_tags pagination_tags %}
+{% block title %}{% trans 'Sprouts by tag' %} - {% trans 'Sprouts' %} - {{ block.super }}{% endblock title %}
+{% block breadcrumb %}{{ block.super }} &ndash; <a href="{% url sprout.views.sprout_tagged tag %}">{% blocktrans %}Sprouts by tag: "<strong>{{ tag }}</strong>"{% endblocktrans %}</a>{% endblock %}
+
+{% block main %}
+    {% autopaginate object_list 10 %}
+    <header class="main">
+        <h2>{% blocktrans %}Sprouts by tag: "<strong>{{ tag }}</strong>"{% endblocktrans %}</h2>
+        <p>{% trans "Page" %}: <strong>{{ page_obj.number }}</strong> / {{ paginator.num_pages }}</p>
+    </header>
+    <section class="main">
+    {% for object in object_list %}
+        <article class="section row {% cycle odd,even %}">
+            {% include "sprouts/_sprout_list.html" %}
+        </article>
+    {% empty %}
+        <p class="section empty">{% trans 'Not found any record.' %}</p>    
+    {% endfor %}
+    </section>
+    <footer class="main">
+        {% paginate %}
+    </footer>
+{% endblock %}

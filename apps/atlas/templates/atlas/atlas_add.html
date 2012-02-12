@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block scripts %}
+    <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+    var map;
+		var marker;
+    
+    function load() {
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById('map'));
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(41.066766,28.9482889), 12);
+				map.enableScrollWheelZoom();
+        
+        GEvent.addListener(map, "click", function(overlay, latlng) {
+          if (latlng) {
+						if (!marker){
+	            new_marker = new GMarker(latlng, {draggable:true});
+	            GEvent.addListener(new_marker, "click", function() {
+	              loc = {
+	                lat:new_marker.getLatLng().lat(),
+	                lng:new_marker.getLatLng().lng()
+	              };
+	              $.get('/atlas/create/', loc, function(data) {
+	                new_marker.openInfoWindow(data);
+	              });              
+	            });
+							marker = new_marker;
+	            map.addOverlay(marker);
+						} else {
+							marker.setLatLng(latlng);
+						}
+						
+
+          }
+        });
+
+      }
+    }
+
+    function saveData() {
+      $.post('/atlas/create/', $('#spod_form').serialize(), function(data) {
+        new_marker.openInfoWindow(data);
+        GEvent.clearListeners(new_marker, 'click');
+        GEvent.addListener(new_marker, 'click', function(){
+          new_marker.openInfoWindow(data);
+        });
+      });
+
+    }                       
+    //]]>
+  </script>
+{% endblock %}
+
+{% block content %}
+<div id="side">
+  <h3 class="heading">{% trans "How to add location" %}</h3>
+  <ol>
+    <li>{% trans "Click on map to add a marker" %}</li>
+    <li>{% trans "You can drag the marker to fine tune location" %}</li>
+    <li>{% trans "Click to marker to enter location details" %}</li>
+    <li>{% trans "Click to save button to insert record" %}</li>
+  </ol>
+</div>
+<div id="map" class="add">
+
+</div>
+{% endblock %}

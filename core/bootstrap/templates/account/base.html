@@ -1,0 +1,17 @@
+{% extends "aside_base.html" %}
+
+{% load ifsetting_tag %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/account.css" />
+{% endblock %}
+
+{% block body_class %}account{% endblock %}
+
+{% block aside %}
+    <h3>{% trans "Account" %}</h3>
+    <ul class="nav nav-tabs nav-stacked">
+        <li><a href="{% url accounts_email_change %}">{% trans "Email Addresses" %}</a></li>
+        <li><a href="{% url accounts_password_change %}">{% trans "Change Password" %}</a></li>
+    </ul>
+{% endblock %}

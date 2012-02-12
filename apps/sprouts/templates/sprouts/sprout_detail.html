@@ -1,0 +1,103 @@
+{% extends "sprouts/base_sprouts.html" %}
+{% load tagging_tags %}
+
+{% block title %}{{ object.title }} - {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <!--// Headline -->
+    <section id="headline" class="content">
+        <p class="command">
+            <a class="create sprout button" href="{% url apps.sprouts.views.sprout_create %}">{% trans "New sprout" %}</a>
+        </p>
+        <p class="breadcrumb">
+            <a href="{% url homepage %}">{% trans "Home" %}</a> &rsaquo;
+            <a href="{% url profiles_profile_detail object.user %}">{{ object.user }}</a> &rsaquo;
+            {{ object|truncatewords:"5" }}
+        </p>        
+    </section>
+
+    <!--// Main -->
+    <article id="main" class="content" role="main">
+        <header class="main">
+            <h1>{{ object.title }}</h1>
+            {% if perms.sprout.can_change or object.user == user %}
+            <p class="commands">
+                <a class="update button" href="{% url apps.sprouts.views.sprout_update object.id %}">{% trans 'update' %}</a>
+                <a class="delete button" href="{% url apps.sprouts.views.sprout_delete object.id %}"
+                  onclick="return confirm('{% blocktrans %}Will be deleted: {{ object }}{% endblocktrans %}')">{% trans 'delete' %}</a>                
+            </p>
+            {% endif %}
+            <div class="meta">
+                <div class="avatar">
+                    <a href="{% url profiles_profile_detail object.user %}">
+                        {% thumbnail object.user.get_profile.avatar "32x32" as im %}
+                        <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" alt="{{ object.user }}" />
+                        {% endthumbnail %}                    
+                    </a>                     
+                </div>
+                <address class="user"><a href="{% url profiles_profile_detail object.user %}">{{ object.user }}</a></address>
+                <time datetime="{{ object.date_created|date:"c" }}">{{ object.date_created|timesince }} {% trans 'ago' %}</time>
+            </div>
+        </header>
+    <!--// Leaves -->
+        <menu type="toolbar" class="main leaf-menu">
+            {% with object as sprout %}
+            <li><a class="{% if module == 'passage' %}active {% endif %}passage" href="{% url apps.sprouts.views.leaf_create sprout.id 'passage' %}">{% trans "Text" %}</a></li>
+            <li><a class="{% if module == 'photo' %}active {% endif %}photo" href="{% url apps.sprouts.views.leaf_create sprout.id 'photo' %}">{% trans "Photo" %}</a></li>
+            {% endwith %}
+        </menu>
+        {% if perms.sprout.can_change or object.user == user %}
+        <script type="text/javascript"> 
+        // When the document is ready set up our sortable with it's inherant function(s) 
+        $(document).ready(function() { 
+            $("#leaves").sortable({
+                handle:  '.handle',
+                axis: 'y',
+                placeholder: 'sortable-placeholder',
+                forcePlaceholderSize: true,
+                //tolerance: 'pointer',
+                update : function () { 
+                    //$("#leaves").load("process-sortable.php?"+order);
+                    $.ajax({
+                        url: '{% url apps.sprouts.views.leaf_sort object.id %}', 
+                        type: 'POST',
+                        data: $('#leaves').sortable('serialize'),
+                        success: function(feedback){
+                            $('#leaves').html(feedback);
+                        },
+                    });
+                }
+            }); 
+        }); 
+        </script>     
+        {% endif %}
+        <section id="leaves" class="main">
+            {% include "sprouts/_sprout_leaves.html" %}
+        </section>
+    <!--// Details -->    
+        {% if object.tag_list %}
+        <details id="tags" class="main">
+            <summary>{% trans 'Tags' %}:</summary>
+            {% for tag in object.tag_list %}<a class="tag" href="{% url apps.sprouts.views.sprout_tagged tag.name|urlencode %}">{{tag}}</a> &nbsp; {% endfor %}
+        </details>
+        {% endif %}
+    <!--// Branches -->
+        <section id="branches" class="main">
+            {% if perms.sprout.can_change or object.user == user %}
+            {% include "sprouts/_branch_form.html" %}
+            {% endif %}
+            {% include "sprouts/_branch_block.html" %}
+        </section>
+
+        <aside id="comments" class="main">
+            {% include 'comments/comments_block.html' %}
+        </aside>
+        
+    </article>
+    <!--// Side -->
+    <aside id="side" class="content" role="complementary" >
+        {% with object.user as user %}
+        {% include "profiles/_profile_panel.html" %}
+        {% endwith %}
+    </aside>
+{% endblock %}
