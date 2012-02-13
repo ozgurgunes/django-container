@@ -4,8 +4,8 @@
     "model": "sites.site", 
     "fields": 
     {
-        "domain": "tardis.local", 
-        "name": "TARDIS"
+        "domain": "container.local", 
+        "name": "Django Container"
     }
 }, 
 {
@@ -13,18 +13,18 @@
     "model": "auth.user", 
     "fields": 
     {
-        "username": "tardis", 
-        "first_name": "tardis", 
-        "last_name": "Admin", 
+        "username": "admin", 
+        "first_name": "Admin", 
+        "last_name": "User", 
         "is_active": true, 
         "is_superuser": true, 
         "is_staff": true, 
-        "last_login": "2010-10-25 19:18:16", 
+        "last_login": "2012-01-01 00:00:00", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "sha1$ea4cc$f139a9a719f11585509756fd6390ff9946326a19", 
-        "email": "filizver@filizver.local", 
-        "date_joined": "2010-10-25 19:16:28"
+        "password": "sha1$e467e$508942f1c9be858fd46dc976c2496ba133ba4122", 
+        "email": "admin@example.com", 
+        "date_joined": "2012-01-01 00:00:00"
     }
 }, 
 {
@@ -32,18 +32,18 @@
     "model": "auth.user", 
     "fields": 
     {
-        "username": "ozgur", 
-        "first_name": "Ozgur", 
-        "last_name": "Gunes", 
+        "username": "test", 
+        "first_name": "Test", 
+        "last_name": "User", 
         "is_active": true, 
         "is_superuser": true, 
         "is_staff": false, 
-        "last_login": "2010-10-25 19:18:16", 
+        "last_login": "2012-01-01 00:00:00", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "sha1$3b24b$2cb715eb354bd7b0950d604a6b1413c410ed3e1d", 
-        "email": "o.gunes@gmail.com",
-        "date_joined": "2010-10-25 19:16:28"
+        "password": "sha1$3cb32$046d34b6eee347cb4ce099b266f1b9b3d066553a", 
+        "email": "test@example.com",
+        "date_joined": "2012-01-01 00:00:00"
     }
 }, 
 {
@@ -51,18 +51,18 @@
     "model": "auth.user", 
     "fields": 
     {
-        "username": "nefila", 
-        "first_name": "Nefila", 
-        "last_name": "Clavipes", 
+        "username": "demo", 
+        "first_name": "Demo", 
+        "last_name": "User", 
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2010-10-25 19:18:16", 
+        "last_login": "2012-01-01 00:00:00", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "sha1$99886$988eebb5549ae24acf1e3c16d1529d9f841406a5", 
-        "email": "ogbulk@gmail.com",
-        "date_joined": "2010-10-25 19:16:28"
+        "password": "sha1$1e2d3$0fd3f38117e48024ad68058252c42e9b9d69ca43", 
+        "email": "demo@example.com",
+        "date_joined": "2012-01-01 00:00:00"
     }
 }
 ]

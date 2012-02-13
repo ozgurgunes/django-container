@@ -6,4 +6,3 @@
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.
 
-MySQL-python==1.2.3

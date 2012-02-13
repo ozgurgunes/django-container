@@ -77,7 +77,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'grappelli')
+ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'i_*74agg3it_bsofcux6yf&^#rd)*zavg(@=mzw(0%f9(b7-3%'
@@ -98,8 +98,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 	'django.core.context_processors.csrf',
 	'django.contrib.messages.context_processors.messages',
-    'core.vortex.context_processors.site_url',
-    'core.vortex.context_processors.site_name',
+    'core.utils.context_processors.site_url',
+    'core.utils.context_processors.site_name',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -150,7 +150,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     # Core
-    'core.vortex',
+    'core.utils',
     'core.accounts',
     'core.bootstrap',
 	'core.profiles',
