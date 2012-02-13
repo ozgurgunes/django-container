@@ -134,11 +134,6 @@ STATICFILES_FINDERS = (
 )
 
 INSTALLED_APPS = (
-    # Custom Admin
-    'grappelli.dashboard',
-    'grappelli',
-    'filebrowser',
-
     # Django
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -160,13 +155,13 @@ INSTALLED_APPS = (
     'core.bootstrap',
 	'core.profiles',
 
-	'debug_toolbar',
 	'pagination',
 	'sorl.thumbnail',
 	'compressor',
 	'guardian',
 	'notification',
 	'announcements',
+	'debug_toolbar',
 )
 
 FIXTURE_DIRS = (
@@ -204,6 +199,8 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = ''
+EMAIL_SUBJECT_PREFIX = ''
 
 # DEFAULT_FROM_EMAIL = 'Site Name <site-name-noreply@site-domain.com>'
 # EMAIL_SUBJECT_PREFIX = '[Site Name] '
