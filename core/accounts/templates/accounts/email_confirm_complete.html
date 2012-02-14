@@ -1,9 +1,7 @@
-{% extends 'accounts/base_accounts.html' %}
-{% load i18n %}
+{% extends "base.html" %}
+{% block title %}{% trans "E-mail address changed!" %} - {{ block.super }}{% endblock %}
 
-{% block title %}{% trans "Email changed!" %}{% endblock %}
-
-{% block content_title %}<h2>{% trans 'New email' %}</h2>{% endblock %}
 {% block content %}
-<p>{% blocktrans with site.name as site %}Your new email address is saved. You can continue using {{ site }} with this email.{% endblocktrans %}</p>
+<h2>{% trans 'New e-mail address' %}</h2>
+<p>{% blocktrans with site.name as site %}Your new e-mail address is saved. You can continue using {{ site }} with this e-mail address.{% endblocktrans %}</p>
 {% endblock %}

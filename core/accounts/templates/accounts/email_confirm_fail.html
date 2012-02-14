@@ -1,10 +1,6 @@
-{% extends 'accounts/base_accounts.html' %}
-{% load i18n %}
-
-{% block title %}{% trans "Email verification failed." %}{% endblock %}
-{% block content_title %}<h2>{% trans "Your email could not be verified..." %}</h2>{% endblock %}
-
+{% extends "base.html" %}
+{% block title %}{% trans "E-mail verification failed" %} - {{ block.super }}{% endblock %}
 {% block content %}
-<p>{% trans "Your email could not be verified..." %}</p>
+<h2>{% trans "Your e-mail address could not be verified..." %}</h2>
 <p>{% trans "You could try changing it again in your account settings." %}</p>
 {% endblock %}

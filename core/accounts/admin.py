@@ -13,7 +13,7 @@ class AccountInline(admin.StackedInline):
 
 class AccountsAdmin(UserAdmin, GuardedModelAdmin):
     inlines = [AccountInline, ]
-    list_display = ('username', 'email', 'first_name', 'last_name',
+    list_display = ('username', 'email', 'first_name', 'last_name', 
                     'is_staff', 'date_joined')
 
 admin.site.unregister(User)

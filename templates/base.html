@@ -5,7 +5,7 @@
 {% block menu_navbar %}
         <ul class="nav">{% spaceless %}
             {% if user.is_authenticated %}
-            <li id="tab_profile"><a href="{% url profile_detail user.username %}">{% trans "Profile" %}</a></li>
+            <li id="tab_profile"><a href="{% url accounts_email_change user.username %}">{% trans "Profile" %}</a></li>
             <li id="tab_notices"><a href="{% url notification_notices %}">{% trans "Notices" %}</a>{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</li>
             {% endif %}
         {% endspaceless %}</ul>

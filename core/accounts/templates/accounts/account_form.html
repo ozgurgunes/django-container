@@ -1,12 +1,11 @@
-{% extends 'accounts/base.html' %}
-
-{% block title %}{% trans "Edit profile" %} - {{ block.super }}{% endblock %}
+{% extends "accounts/base.html" %}
+{% block title %}{% trans "Edit account" %} - {{ block.super }}{% endblock %}
 
 {% block main %}
 <form action="" enctype="multipart/form-data" method="post" class="form form-horizontal">
   {% csrf_token %}
   <fieldset>
-    <legend>{% trans "Edit profile" %}</legend>
+    <legend>{% trans "Edit Account" %}</legend>
     {{ form|as_bootstrap }}
   </fieldset>
   <div class="form-actions">

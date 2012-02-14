@@ -1,7 +1,6 @@
-{% extends 'accounts/base_accounts.html' %}
-{% load i18n %}
+{% extends 'aside_base.html' %}
 
-{% block content_title %}<h2>{% trans 'Profiles' %}</h2>{% endblock %}
+{% block title %}{% trans 'User Profiles' %} - {{ block.super }}{% endblock %}
 
 {% block content %}
 <ul id="profile_list">

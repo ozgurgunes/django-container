@@ -38,8 +38,8 @@ class Profile(ProfileBase):
     country             = CountryField(_('country'), blank=True, null=True)
         
     class Meta:
-        verbose_name = _('user profile')
-        verbose_name_plural = _('user profiles')
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
     
     def __unicode__(self):
         return u"Profile object for %s user" % self.user

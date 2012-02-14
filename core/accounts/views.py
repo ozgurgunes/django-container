@@ -12,7 +12,7 @@ from django.views.generic import list_detail
 from django.http import HttpResponseForbidden, Http404
 
 from core.accounts.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
-                           ChangeEmailForm, EditProfileForm)
+                           ChangeEmailForm, EditProfileForm, EditAccountForm)
 from core.accounts.models import Account
 from core.accounts.decorators import secure_required
 from core.accounts.backends import AccountsAuthenticationBackend
@@ -449,6 +449,85 @@ def password_change(request, username, template_name='accounts/password_form.htm
     return direct_to_template(request,
                               template_name,
                               extra_context=extra_context)
+
+@secure_required
+@permission_required_or_403('change_account', (Account, 'user__username', 'username'))
+def account_edit(request, username, edit_account_form=EditAccountForm,
+                 template_name='accounts/account_form.html', success_url=None,
+                 extra_context=None, **kwargs):
+    """
+    Edit account.
+
+    Edits an account selected by the supplied username. First checks
+    permissions if the user is allowed to edit this account, if denied will
+    show a 404. When the account is succesfully edited will redirect to
+    ``success_url``.
+
+    :param username:
+        Username of the user which account should be edited.
+
+    :param edit_account_form:
+
+        Form that is used to edit the account. The :func:`EditAccountForm.save`
+        method of this form will be called when the form
+        :func:`EditAccountForm.is_valid`.  Defaults to :class:`EditAccountForm`
+        from core.accounts.
+
+    :param template_name:
+        String of the template that is used to render this view. Defaults to
+        ``accounts/edit_account_form.html``.
+
+    :param success_url:
+        Named URL which be passed on to a django ``reverse`` function after the
+        form is successfully saved. Defaults to the ``accounts_detail`` url.
+
+    :param extra_context:
+        Dictionary containing variables that are passed on to the
+        ``template_name`` template.  ``form`` key will always be the form used
+        to edit the account, and the ``account`` key is always the edited
+        account.
+
+    **Context**
+
+    ``form``
+        Form that is used to alter the account.
+
+    ``account``
+        Instance of the ``Account`` that is edited.
+
+    """
+    user = get_object_or_404(User,
+                             username__iexact=username)
+
+    account = user.account
+
+    user_initial = {'first_name': user.first_name,
+                    'last_name': user.last_name}
+
+    form = edit_account_form(instance=account, initial=user_initial)
+
+    if request.method == 'POST':
+        form = edit_account_form(request.POST, request.FILES, instance=account,
+                                 initial=user_initial)
+
+        if form.is_valid():
+            account = form.save()
+
+            if accounts_settings.ACCOUNTS_USE_MESSAGES:
+                messages.success(request, _('Your account has been updated.'),
+                                 fail_silently=True)
+
+            if success_url: redirect_to = success_url
+            else: redirect_to = reverse('accounts_profile_detail', kwargs={'username': username})
+            return redirect(redirect_to)
+
+    if not extra_context: extra_context = dict()
+    extra_context['form'] = form
+    extra_context['account'] = account
+    return direct_to_template(request,
+                              template_name,
+                              extra_context=extra_context,
+                              **kwargs)
 
 @secure_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))

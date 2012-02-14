@@ -204,6 +204,87 @@ class ChangeEmailForm(forms.Form):
         """
         return self.user.account.change_email(self.cleaned_data['email'])
 
+class ChangeNameForm(forms.ModelForm):
+    first_name          = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={'class':'text'}))
+    last_name          = forms.CharField(max_length=30, required=False, widget=forms.TextInput(attrs={'class':'text'}))
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+class NewPasswordForm(forms.Form):
+    """
+    A form that lets a user change set his/her password without
+    entering the old password
+    """
+    new_password1 = forms.CharField(label=_("New password"), widget=forms.PasswordInput(attrs=dict({'class':'password text'})))
+    new_password2 = forms.CharField(label=_("New password confirmation"), widget=forms.PasswordInput(attrs=dict({'class':'password text'})))
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(SetPasswordForm, self).__init__(*args, **kwargs)
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(_("The two password fields didn't match."))
+        return password2
+
+    def save(self, commit=True):
+        self.user.set_password(self.cleaned_data['new_password1'])
+        if commit:
+            self.user.save()
+        return self.user
+                
+class ChangePasswordForm(NewPasswordForm):
+    """
+    A form that lets a user change his/her password by entering
+    their old password.
+    """
+    old_password = forms.CharField(label=_("Old password"), widget=forms.PasswordInput(attrs=dict({'class':'password text'})))
+
+    def clean_old_password(self):
+        """
+        Validates that the old_password field is correct.
+        """
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise forms.ValidationError(_("Your old password was entered incorrectly. Please enter it again."))
+        return old_password
+ChangePasswordForm.base_fields.keyOrder = ['old_password', 'new_password1', 'new_password2']
+
+class EditAccountForm(forms.ModelForm):
+    """ Base form used for fields that are always required """
+    first_name = forms.CharField(label=_(u'First name'),
+                                 max_length=30,
+                                 required=False)
+    last_name = forms.CharField(label=_(u'Last name'),
+                                max_length=30,
+                                required=False)
+
+    def __init__(self, *args, **kw):
+        super(EditAccountForm, self).__init__(*args, **kw)
+        # Put the first and last name at the top
+        new_order = self.fields.keyOrder[:-2]
+        new_order.insert(0, 'first_name')
+        new_order.insert(1, 'last_name')
+        self.fields.keyOrder = new_order
+
+    class Meta:
+        model = Account
+        exclude = ['user']
+
+    def save(self, force_insert=False, force_update=False, commit=True):
+        account = super(EditAccountForm, self).save(commit=commit)
+        # Save first and last name
+        user = account.user
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+
+        return account
+
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_(u'First name'),

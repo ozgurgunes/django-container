@@ -89,8 +89,8 @@ class Account(models.Model):
     objects = AccountsManager()
 
     class Meta:
-        verbose_name = _('accounts registration')
-        verbose_name_plural = _('accounts registrations')
+        verbose_name = _('account')
+        verbose_name_plural = _('account')
 
     def __unicode__(self):
         return '%s' % self.user.username
@@ -342,13 +342,8 @@ class ProfileBase(models.Model):
         """
         # Simple cases first, we don't want to waste CPU and DB hits.
         # Everyone.
-        if self.privacy == 'open': return True
-        # Registered users.
-        elif self.privacy == 'registered' and isinstance(user, User):
-            return True
-
         # Checks done by guardian for owner and admins.
-        elif 'view_profile' in get_perms(user, self):
+        if 'view_profile' in get_perms(user, self):
             return True
 
         # Fallback to closed profile.
