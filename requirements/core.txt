@@ -3,7 +3,7 @@
 # project specific not listed here use apps.txt. You can, of course, update
 # versions of distributions here if needed.
 
-Django==1.11.29
+Django==2.2.24
 Markdown==2.1.0
 MySQL-python==1.2.3
 PIL==1.1.7
